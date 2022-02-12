@@ -1,20 +1,107 @@
 import {Component} from 'react'
+import {v4 as uuidv4} from 'uuid'
+
 import Password from '../Password'
 import './index.css'
 
-const list = [
-  {
-    website: 'youtube.com',
-    username: 'srikanth',
-    password: '125hyt',
-  },
-]
+const list = []
 
 class Passwordmanager extends Component {
-  state = {initiallist: list}
+  state = {
+    initiallist: list,
+    inputwebsite: '',
+    inputusername: '',
+    inputpassword: '',
+    showpassword: false,
+    search: '',
+  }
+
+  websitename = e => {
+    this.setState({inputwebsite: e.target.value})
+  }
+
+  username = e => {
+    this.setState({inputusername: e.target.value})
+  }
+
+  password = e => {
+    this.setState({inputpassword: e.target.value})
+  }
+
+  imagecontainer = () => {
+    // eslint-disable-next-line
+    const {initiallist} = this.state
+    return (
+      <div className="nopasswordcontainer">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-passwords-img.png"
+          className="Nopasswordimg"
+          alt="no passwords"
+        />
+        <p className="nopasswords">No Passwords</p>
+      </div>
+    )
+  }
+
+  senddata = () => {
+    const {inputwebsite, inputusername, inputpassword} = this.state
+    const newlist = {
+      id: uuidv4(),
+      inputwebsite,
+      inputusername,
+      inputpassword,
+    }
+    this.setState(prevstate => ({
+      initiallist: [...prevstate.initiallist, newlist],
+      inputwebsite: '',
+      inputusername: '',
+      inputpassword: '',
+    }))
+  }
+
+  delete = id => {
+    const {initiallist} = this.state
+    const finallist = initiallist.filter(eachlist => eachlist.id !== id)
+    this.setState({
+      initiallist: finallist,
+    })
+  }
+
+  checkboxclicked = () => {
+    this.setState(prevstate => ({
+      showpassword: !prevstate.showpassword,
+    }))
+  }
+
+  search = e => {
+    // const {initiallist} = this.state
+    const searchitem = e.target.value.toLowerCase()
+    // const finallist = initiallist.filter(eachlist =>
+    //   eachlist.inputwebsite.toLowerCase().includes(searchitem),
+    // )
+
+    this.setState({search: searchitem})
+  }
+
+  renderlist = () => {
+    const {showpassword, initiallist, search} = this.state
+    const finallist = initiallist.filter(eachlist =>
+      eachlist.inputwebsite.toLowerCase().includes(search),
+    )
+    return finallist.map(eachlist => (
+      <Password
+        lists={eachlist}
+        password={showpassword}
+        key={eachlist.id}
+        deleted={this.delete}
+      />
+    ))
+  }
 
   render() {
-    const {initiallist} = this.state
+    const {initiallist, inputwebsite, inputusername, inputpassword} = this.state
+    const length = initiallist.length === 0
+    const count = initiallist.length
     return (
       <div className="container">
         <img
@@ -37,6 +124,8 @@ class Passwordmanager extends Component {
                 type="text"
                 placeholder="Enter Website"
                 className="inputwebsite"
+                onChange={this.websitename}
+                value={inputwebsite}
               />
             </div>
             <div className="usernamecontainer">
@@ -51,6 +140,8 @@ class Passwordmanager extends Component {
                 type="text"
                 placeholder="Enter Username"
                 className="inputusername"
+                onChange={this.username}
+                value={inputusername}
               />
             </div>
             <div className="passwordcontainer">
@@ -65,10 +156,12 @@ class Passwordmanager extends Component {
                 type="password"
                 placeholder="Enter Password"
                 className="inputpassword"
+                onChange={this.password}
+                value={inputpassword}
               />
             </div>
             <div className="buttoncontainer">
-              <button type="button" className="button">
+              <button type="button" className="button" onClick={this.senddata}>
                 Add
               </button>
             </div>
@@ -85,7 +178,7 @@ class Passwordmanager extends Component {
           <div className="lowerheadingdiv">
             <div className="headingcountdiv">
               <h3 className="yourpassword">Your Passwords</h3>
-              <div className="count">2</div>
+              <div className="count">{count}</div>
             </div>
             <div className="searchbarcontainer">
               <div className="searchimgcontainer">
@@ -96,17 +189,24 @@ class Passwordmanager extends Component {
                 />
               </div>
 
-              <input type="search" placeholder="Search" className="searchbar" />
+              <input
+                type="search"
+                placeholder="Search"
+                className="searchbar"
+                onChange={this.search}
+              />
             </div>
           </div>
           <div className="checkboxcontainer">
-            <input type="checkbox" className="checkbox" />
+            <input
+              type="checkbox"
+              className="checkbox"
+              onClick={this.checkboxclicked}
+            />
             <span className="passwordshowcheckbox">Show passwords</span>
           </div>
           <ul className="unorderedlist">
-            {initiallist.map(eachlist => (
-              <Password lists={eachlist} />
-            ))}
+            {length ? this.imagecontainer() : this.renderlist()}
           </ul>
         </div>
       </div>

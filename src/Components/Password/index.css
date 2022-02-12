@@ -4,6 +4,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  margin: 10px;
 }
 .profilecontainer {
   background-color: #10b981;
@@ -19,6 +20,7 @@
 }
 .detailscontainer {
   margin-right: 10px;
+  min-width: 125px;
 }
 .websitedetails,
 .usernamedetails {
@@ -31,4 +33,10 @@
 }
 .delete {
   width: 20px;
+  cursor: pointer;
+}
+.passwordshow {
+  margin: 0px;
+  font-size: 14px;
+  color: #f8fafc;
 }
