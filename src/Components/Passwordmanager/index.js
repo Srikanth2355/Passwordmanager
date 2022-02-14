@@ -43,20 +43,40 @@ class Passwordmanager extends Component {
     )
   }
 
+//   senddata = () => {
+//     const {inputwebsite, inputusername, inputpassword} = this.state
+//     const newlist = {
+//       id: uuidv4(),
+//       inputwebsite,
+//       inputusername,
+//       inputpassword,
+//     }
+//     this.setState(prevstate => ({
+//       initiallist: [...prevstate.initiallist, newlist],
+//       inputwebsite: '',
+//       inputusername: '',
+//       inputpassword: '',
+//     }))
+//   }
+  
   senddata = () => {
     const {inputwebsite, inputusername, inputpassword} = this.state
-    const newlist = {
-      id: uuidv4(),
-      inputwebsite,
-      inputusername,
-      inputpassword,
+    if (inputwebsite === '' || inputusername === '' || inputpassword === '') {
+      alert('website,username,password are manadatory')
+    } else {
+      const newlist = {
+        id: uuidv4(),
+        inputwebsite,
+        inputusername,
+        inputpassword,
+      }
+      this.setState(prevstate => ({
+        initiallist: [...prevstate.initiallist, newlist],
+        inputwebsite: '',
+        inputusername: '',
+        inputpassword: '',
+      }))
     }
-    this.setState(prevstate => ({
-      initiallist: [...prevstate.initiallist, newlist],
-      inputwebsite: '',
-      inputusername: '',
-      inputpassword: '',
-    }))
   }
 
   delete = id => {
