@@ -111,11 +111,11 @@
   border: 1px solid #f8fafc;
   border-radius: 50%;
   padding: 5px 10px 5px 10px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f8fafc;
-  width: 40px;
 }
 .searchbarcontainer {
   display: flex;
@@ -184,4 +184,63 @@ input.checkbox {
   margin: 0px;
   font-size: 20px;
   font-weight: 700;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .passwordmanagerimg {
+    width: 350px;
+    height: 350px;
+  }
+  .inputcontainer {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .uppercontainer {
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+  .passwordmanagerimg {
+    width: 550px;
+  }
+  .inputcontainer {
+    width: 550px;
+  }
+  .buttoncontainer {
+    margin-bottom: 10px;
+  }
+  /* .unorderedlist {
+    justify-content: center;
+  } */
+}
+
+@media screen and (max-width: 575px) {
+  .passwordmanagerimg {
+    width: 280px;
+  }
+  /* .inputcontainer {
+    width: unset;
+  } */
+  .yourpassword {
+    font-size: 14px;
+  }
+  .count {
+    padding: 0px 10px 0px 10px;
+    width: 30px;
+    margin-right: 10px;
+  }
+  .Nopasswordimg {
+    width: 280px;
+  }
+  .lowercontainer {
+    padding: 5px;
+  }
+  .uppercontainer {
+    padding: 5px;
+  }
+  .searchbarcontainer {
+    width: 200px;
+  }
 }

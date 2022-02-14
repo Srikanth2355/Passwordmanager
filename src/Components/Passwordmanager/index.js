@@ -76,9 +76,6 @@ class Passwordmanager extends Component {
   search = e => {
     // const {initiallist} = this.state
     const searchitem = e.target.value.toLowerCase()
-    // const finallist = initiallist.filter(eachlist =>
-    //   eachlist.inputwebsite.toLowerCase().includes(searchitem),
-    // )
 
     this.setState({search: searchitem})
   }
@@ -99,9 +96,18 @@ class Passwordmanager extends Component {
   }
 
   render() {
-    const {initiallist, inputwebsite, inputusername, inputpassword} = this.state
-    const length = initiallist.length === 0
-    const count = initiallist.length
+    const {
+      initiallist,
+      inputwebsite,
+      inputusername,
+      inputpassword,
+      search,
+    } = this.state
+    const finallist = initiallist.filter(eachlist =>
+      eachlist.inputwebsite.toLowerCase().includes(search),
+    )
+    const length = finallist.length === 0
+    const count = finallist.length
     return (
       <div className="container">
         <img
