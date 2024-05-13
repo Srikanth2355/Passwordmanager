@@ -38,27 +38,11 @@ class Passwordmanager extends Component {
           className="Nopasswordimg"
           alt="no passwords"
         />
-        <p className="nopasswords">No Passwords</p>
+        <p className="nopasswords">No Passwords Saved Yet.</p>
       </div>
     )
   }
 
-//   senddata = () => {
-//     const {inputwebsite, inputusername, inputpassword} = this.state
-//     const newlist = {
-//       id: uuidv4(),
-//       inputwebsite,
-//       inputusername,
-//       inputpassword,
-//     }
-//     this.setState(prevstate => ({
-//       initiallist: [...prevstate.initiallist, newlist],
-//       inputwebsite: '',
-//       inputusername: '',
-//       inputpassword: '',
-//     }))
-//   }
-  
   senddata = () => {
     const {inputwebsite, inputusername, inputpassword} = this.state
     if (inputwebsite === '' || inputusername === '' || inputpassword === '') {
